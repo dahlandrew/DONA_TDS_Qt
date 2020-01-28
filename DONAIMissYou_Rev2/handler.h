@@ -72,6 +72,7 @@ public:
     Q_INVOKABLE void unitCheck(QString unitString);
     Q_INVOKABLE void storedSettings();
     Q_INVOKABLE void startNew();
+
     Q_INVOKABLE void email(QString emailString);
     Q_INVOKABLE void languageCheck(QString language);
     Q_INVOKABLE void frequencyCheck(QString frequencyString);

@@ -167,6 +167,7 @@ Page
         width: 296
         height: 40
         placeholderText: qsTr("--")
+        validator: DoubleValidator{bottom: 1.00; top: 10.00;}
         horizontalAlignment: Text.AlignHCenter
         color: "#ffffff"
         Material.theme: "Dark"
@@ -466,6 +467,7 @@ Page
         horizontalAlignment: Text.AlignHCenter
         color: "#ffffff"
         Material.theme: "Dark"
+        validator: IntValidator{bottom: 0; top: 1000000;}
     }
 
     /*Button {
@@ -593,6 +595,7 @@ Page
         horizontalAlignment: Text.AlignHCenter
         color: "#ffffff"
         Material.theme: "Dark"
+        validator: IntValidator{bottom: 0; top: 1000000;}
     }
 
     Button {

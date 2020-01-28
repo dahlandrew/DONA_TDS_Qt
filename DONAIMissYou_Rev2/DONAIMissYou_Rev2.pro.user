@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.10.0, 2020-01-23T14:37:27. -->
+<!-- Written by QtCreator 4.10.0, 2020-01-28T12:10:24. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -368,7 +368,7 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">DONAIMissYou_Rev2</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">DONAIMissYou_Rev2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:C:/Users/Andrew Dahl/Documents/DONAIMissYou_Rev2/DONAIMissYou_Rev2.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:C:/Users/Andrew Dahl/Documents/DONA_TDS_Qt/DONAIMissYou_Rev2/DONAIMissYou_Rev2.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>

@@ -76,7 +76,7 @@ NewJobForm
         target: handler
         onTorqueUnitSig:{
             if(trqUnit === 0){
-                torqueUnits.text = "Ft-Lbs";
+                torqueUnits.text = "ft-lbs";
             }
             if(trqUnit === 1){
                 torqueUnits.text = "Nm";

@@ -98,8 +98,8 @@ void handler::timerSlot(handler *handler)
 
 void handler::record() //called when timer goes off to append data to list
 {
-    xAngLst.append(xAng);
-    zAngLst.append(zAng);
+    //xAngLst.append(xAng);
+    //zAngLst.append(zAng);
     torqueList.append(torqueStr);
     timeList.append(dateTime);
     qDebug() << "done";
@@ -109,8 +109,8 @@ void handler::transStart()  //called when record button is hit
 {
     torqueList.clear();     //data is always added to these lists
     timeList.clear();       //when record is hit,the lists are cleared so only desired data is written to pdf
-    xAngLst.clear();
-    zAngLst.clear();
+    //xAngLst.clear();
+    //zAngLst.clear();
 
     QtConcurrent::run(this, &handler::createCsvThread, this); //starts the pdf thread
     QtConcurrent::run(this, &handler::timerSlot, this); //starts the timer thread
@@ -193,12 +193,18 @@ void handler::voltageReceive(QString voltage, int count, QString time,
     if(torqueFlt > tMax)
     {
         tMax = torqueFlt;
-        if(QString::number(tMax).length() > 3)
+        if(QString::number(qRound(tMax)).length() > 3)
+        {
             tMaxStr = QString::number(qRound(tMax)).insert(QString::number(qRound(tMax)).length() - 3, ",");
+        }
+        else
+        {
+            tMaxStr = QString::number(qRound(tMax));
+        }
     }
 
     zeroPos = qCeil(6 *(tMax)/(tMax - tMin));
-    qDebug() << zeroPos;
+    //qDebug() << zeroPos;
 
     diff = qRound(tMax - tMin);
 
@@ -239,7 +245,7 @@ void handler::voltageReceive(QString voltage, int count, QString time,
     {
         torqueStr.insert(charLength - 3, ",");
     }
-
+    qDebug() << tMax;
     emit homeDisplay(torqueStr, torqueFlt, tMaxStr, units);
     emit graphUpdate(torqueFlt, count, cropTime, tMin, tMax, lcm, zeroPos);
 }
@@ -262,10 +268,10 @@ void handler::haltRecord()
 
 void handler::torqueUnitSubmit(QString torqueUnitFlg)
 {
-    if(torqueUnitFlg == "Ft-Lbs")       //stores the units for torqued selected by user: 0 = Ft-Lbs, 1 = Nm
+    if(torqueUnitFlg == "ft-lbs")       //stores the units for torqued selected by user: 0 = Ft-Lbs, 1 = Nm
     {
         trqUnit = 0;
-        units = "Ft-Lbs";
+        units = "ft-lbs";
     }
     if(torqueUnitFlg == "Nm")
     {
@@ -416,7 +422,13 @@ void handler::locationSub(QString location)
 void handler::tarTorSub(QString tarTor)
 {
     if(tarTor.length() > 3)
+    {
         svdTarTor = tarTor.insert(tarTor.length() - 3, ",");
+    }
+    else
+    {
+        svdTarTor = tarTor;
+    }
     emit tarTorSig(svdTarTor);
 }
 

@@ -109,7 +109,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 5
-            text: qsTr("Ft-Lbs")
+            text: qsTr("ft-lbs")
             font.pointSize: 12
             color: "#ffffff"
         }

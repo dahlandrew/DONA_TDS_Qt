@@ -8,7 +8,7 @@ import QtCharts 2.3
 
 WelcomeForm
 {
-    startNew.onClicked: stackView.replace("NewJob.qml")
+    startNew.onClicked: handler.startNew();
     recallJob.onClicked:
     {
         stackView.push("SavedJobs.qml")
