@@ -50,6 +50,7 @@ NewJobForm
     setupDone.onClicked: {
         stackView.replace("Home.qml")
         handler.storedSettings();
+        handler.graphReset();
     }
     /*singleSpeed.onClicked: {
         driveModelSelect.visible = true;

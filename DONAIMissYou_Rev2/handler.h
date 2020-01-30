@@ -63,7 +63,7 @@ public:
     ~handler();
     void quitThread();
     Q_INVOKABLE void transStart();
-    Q_INVOKABLE void voltageReceive(QString voltage, int count, QString time, qreal theta, qreal psi, qreal phi);
+    Q_INVOKABLE void voltageReceive(QString voltage, QString time);
     Q_INVOKABLE void failedConnect();
     Q_INVOKABLE void haltRecord();
     Q_INVOKABLE void torqueUnitSubmit(QString torqueUnitFlg);
@@ -71,8 +71,8 @@ public:
     Q_INVOKABLE void logIntSubmit(QString logIntFlg);
     Q_INVOKABLE void unitCheck(QString unitString);
     Q_INVOKABLE void storedSettings();
+    Q_INVOKABLE void graphReset();
     Q_INVOKABLE void startNew();
-
     Q_INVOKABLE void email(QString emailString);
     Q_INVOKABLE void languageCheck(QString language);
     Q_INVOKABLE void frequencyCheck(QString frequencyString);
@@ -103,7 +103,7 @@ public:
     Q_INVOKABLE QBrush titleBrush();
     Q_INVOKABLE void storeStages(QString numStages);
     //Q_INVOKABLE void anchorCounter();
-    void dataList(QString voltage, int count, QString time, qreal theta, qreal psi, qreal phi);
+    //void dataList(QString voltage, int count, QString time, qreal theta, qreal psi, qreal phi);
     void storeGps(QString latt, QString longit);
     void timerSlot(handler *handler);
     void record();
@@ -141,7 +141,7 @@ signals:
     void serialNumSig(QString svdSerNum);
     void csvHeadersSig(QString svdJobName, QString svdCustomer, QString svdLocation, QString svdTarTor,
                         QString svdSerNum, int trqUnit, QString outputRatio, int stages);
-    void graphUpdate(double voltageNum, int count, int cropTime, double tMin, double tMax, int lcm, int zeroPos);
+    void graphUpdate(double voltageNum, int count, int cropTime, int yMin, int yMax, int lcm, int zeroPos);
     void buildFile(QStringList voltageList, int dataLength, QStringList timeList, QStringList xAngLst, QStringList zAngLst);
     void openTCP();
     void setAngle(QString orgAng, QString smAng, QString mdAng, QString lgAng);
@@ -160,6 +160,7 @@ signals:
     void tnthSvdJobSig(QString tnthJb, QString tnthDt);
     void stopTimer();
     void stagesSig(int stages);
+    void clearGraph();
 
 public slots:
 
@@ -174,7 +175,7 @@ private:
 
     int index, store, trqUnit, dpthUnit, delay, in[2],
         smAngInt, mdAngInt, lgAngInt, currentDepth = 0, tapInterval,
-        diff, lcm, lowEnd, zeroPos, cropTime = 0, stages = 0, charLength;
+        diff, lcm, lowEnd, zeroPos, cropTime = 0, stages = 0, charLength, count = 0, yMax = 300, yMin = -300;
 
     QString angle[2], smAng, mdAng, lgAng, orgAng = "10\xB0 , 20\xB0 , 30\xB0", svdJobName,
         outputRatio = "0", svdCustomer, svdLocation, svdTarTor,
@@ -185,9 +186,11 @@ private:
 
     QStringList readSvdList, svdJbsList, svdDatesList, anchorList;
 
+    QList<double> graphList;
+
     QString svdJbsPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/SavedJobs";
 
-    double subVal = 0, torqueFlt, tMax = 0, tMin = 0;
+    double subVal = 0, torqueFlt, tMax = 0, tMin = 0, phLow = 0, phHigh = 0, graphMax = 300, graphMin = -300, compare;
 
     qreal dotX, dotY, innerCircle, scndCircle, thrdCircle, outerCircle;
 

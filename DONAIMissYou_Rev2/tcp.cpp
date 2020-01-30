@@ -47,7 +47,6 @@ void tcp:: openConnect()
 
 void tcp::readSocket()
 {
-    count++;                //this does nothing
     TDS->write("TorqueIt\r\n\r\n\r\n");     //you must send a message to the server to let it know that you are ready to receive, the message just must be a string
     TDS->bytesAvailable();      //check how many bytes are available in socket
     TDS->waitForReadyRead();
@@ -71,7 +70,6 @@ void tcp::readSocket()
     int back = str.indexOf(bookend, 1);
 
     QString base_str = str.mid(front + 1, back - 1);
-    qDebug() << base_str;
 
     for(int i = 0; i <= 5; i++)
     {
@@ -104,7 +102,7 @@ void tcp::readSocket()
     time = local.time().toString();
     //timeList.append(time);
 
-    emit readResults(voltage, count, time, theta, psi, phi);        //send changing values to handler
+    emit readResults(voltage, time);        //send changing values to handler
     emit gpsData(latt, longit);                                     //send gps data, i split them up originally because I read somewhere that you can only send 6 variables in a signal
     /*if (dataLength > 1)                                           //This is true when sending between qml and c++ (i would send one variable at a time bt the two) have not found limit c++ --> c++
     {
@@ -143,13 +141,11 @@ void tcp::waitForConnect()          //this function keeps trying to connect to a
 
         if(!TDS->waitForConnected(3000))
         {
-            qDebug() << "Could not Connect to Torque Detection System\n";
             emit failedConnect();
             //waitForConnect();
         }
         else
         {
-            qDebug() << "Connected to Torque Dection System\n";
             break;                  //once a connection is established, it breaks the loops and goes to tcp::openConnect()
         }
     }

@@ -10,27 +10,27 @@ SettingsForm {
     Connections
     {
         target: handler
-        onSetAngle:
+        /*onSetAngle:
         {
             incl.text = orgAng;
-        }
-        onSetDispPos:
+        }*/
+        /*onSetDispPos:
         {
             showPosition.checked = showPos;
-        }
-        onSetDispDepth:
+        }*/
+        /*onSetDispDepth:
         {
             showDepth.checked = showDepthBool;
-        }
+        }*/
         onSetDispTarTrq:
         {
             showTargetTorque.checked = showTarTor;
         }
-        onSetDispTrqTap:
+        /*onSetDispTrqTap:
         {
             torqueTap.checked = showTorTap;
-        }
-        onTorqueUnitSig:{
+        }*/
+        /*onTorqueUnitSig:{
             if(trqUnit === 0){
                 torqueUnits.text = "ft-lbs";
             }
@@ -47,10 +47,10 @@ SettingsForm {
                 depthUnits.text = "Meters";
                 depthUnitTnl.text = "Meters";
             }
-        }
-        onDepthIntSig:{
+        }*/
+        /*onDepthIntSig:{
             depthInt.text = depthInteger;
-        }
+        }*/
         onSetLanguage:{
             language.text = languageString;
         }
@@ -97,7 +97,7 @@ SettingsForm {
 
     emailInput.onEditingFinished: handler.email(emailInput.text)
 
-    torqueUnitsButton.onClicked: stackView.push("qrc:/TorqueUnits.qml")
+    //torqueUnitsButton.onClicked: stackView.push("qrc:/TorqueUnits.qml")
     //depthUnitsButton.onClicked: stackView.push("qrc:/DepthUnits.qml")
     loggingIntButton.onClicked: stackView.push("qrc:/LoggingInterval.qml")
     /*depthInt.onEditingFinished: {

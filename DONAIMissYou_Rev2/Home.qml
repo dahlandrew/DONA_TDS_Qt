@@ -27,6 +27,10 @@ HomeForm{
             {
                 rotDir.source = "qrc:/clockwise.png";
             }
+            if(torqueFlt < 10 && torqueFlt > -10)
+            {
+                rotDir.source = "qrc:/null.png";
+            }
         }
 
         onWaitForConnect:
@@ -34,12 +38,12 @@ HomeForm{
             //warning.open();
         }
         onTorqueUnitSig:{
-            if(trqUnit === 0){
+            if(trqUnit === 0) {
                 maxTorqUnits.text = "ft-lbs";
                 tarTorUnits.text = "ft-lbs";
                 vertAxLbl.text = "Torque (ft-lbs)";
             }
-            if(trqUnit === 1){
+            if(trqUnit === 1) {
                 maxTorqUnits.text = "Nm";
                 tarTorUnits.text = "Nm";
                 vertAxLbl.text = "Torque (Nm)"
@@ -59,10 +63,13 @@ HomeForm{
         }
         onGraphUpdate:{
             torquePlot.insert(count, count, voltageNum);
-            yAxis.min = (zeroPos - 6)*(lcm/6);
-            yAxis.max = zeroPos*(lcm/6);
+            yAxis.min = yMin;
+            yAxis.max = yMax;
             xAxis.max = count;
             xAxis.min = cropTime;
+        }
+        onClearGraph: {
+            torquePlot.removePoints(0, torquePlot.count);
         }
     }
 
@@ -346,7 +353,7 @@ HomeForm{
         ValueAxis{
             id: xAxis
             min: 0
-            max: 200
+            max: 30
             titleText: qsTr("Time (sec)")
             color: "#ffffff"
             gridLineColor: "#ffffff"
@@ -354,18 +361,21 @@ HomeForm{
             labelFormat: "%i"
             labelsFont:Qt.font({pointSize: 10})
             tickCount: 7
-            tickInterval: 15
             titleBrush: handler.titleBrush()
         }
         ValueAxis{
             id: yAxis
+            min: -300
+            max: 300
             color: "#ffffff"
             gridLineColor: "#ffffff"
             labelsColor: "#ffffff"
             labelFormat: "%i"
             labelsFont:Qt.font({pointSize: 10})
             tickCount: 7
-            tickInterval: 600
+            tickInterval: 100
+            tickAnchor: 0
+            tickType: yAxis.TicksDynamic
             titleBrush: handler.titleBrush()
         }
 

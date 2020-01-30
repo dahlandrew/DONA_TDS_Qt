@@ -53,7 +53,7 @@ void handler::createTcpThread(handler* handler)
     //This function has all signal-slot connections for tcp thread
     //QObject::connect(TCP, &tcp::check, handler, &handler::conStatus, Qt::QueuedConnection);
     QObject::connect(TCP, &tcp::readResults, handler, &handler::voltageReceive, Qt::QueuedConnection);
-    QObject::connect(TCP, &tcp::readResults, handler, &handler::dataList, Qt::QueuedConnection);
+    //QObject::connect(TCP, &tcp::readResults, handler, &handler::dataList, Qt::QueuedConnection);
     QObject::connect(TCP, &tcp::failedConnect, handler, &handler::failedConnect, Qt::QueuedConnection);
     QObject::connect(handler, &handler::stopRecord, TCP, &tcp::stopRecord, Qt::QueuedConnection);
     QObject::connect(handler, &handler::delaySig, TCP, &tcp::setDelay, Qt::QueuedConnection);
@@ -63,7 +63,7 @@ void handler::createTcpThread(handler* handler)
     TCP->openConnect(); //start socket
 }
 
-void handler::dataList(QString voltage, int count, QString time, qreal theta, qreal psi, qreal phi)
+/*void handler::dataList(QString voltage, int count, QString time, qreal theta, qreal psi, qreal phi)
 {
     //received from TCP thread
     xAng = QString::number(theta);  //convert string to number
@@ -75,7 +75,7 @@ void handler::dataList(QString voltage, int count, QString time, qreal theta, qr
     //zAngLst.append(zAng);
     //voltageList.append(voltage);
     //timeList.append(time);
-}
+}*/
 
 void handler::storeGps(QString latt, QString longit)
 {
@@ -124,20 +124,20 @@ void handler::createCsvThread(handler *handler)
     csvwriter->start();
 }
 
-void handler::voltageReceive(QString voltage, int count, QString time,
-                             qreal theta, qreal psi, qreal phi)
+void handler::voltageReceive(QString voltage, QString time)
 {
+    count++;
     //theta is x direction always
     //phi is y direction on crossheirs but z on accel
-    if(qSqrt((theta*theta) + (phi*phi)) > 30) //if mag of ang is > 30 (max angle on cross-heirs) than you can't see dot
+    /*if(qSqrt((theta*theta) + (phi*phi)) > 30) //if mag of ang is > 30 (max angle on cross-heirs) than you can't see dot
     {
         dotVis = false;                       //ensures dot won't be visible outside of cross-heirs
     }
     if(qFabs(theta) < lgAngInt && qFabs(phi) < lgAngInt) //turns it visible again
     {
-        dotVis = true;
+        dotVis = true;*/
 
-        /*if(theta > 0 && theta < smAngInt)
+    /*if(theta > 0 && theta < smAngInt)
         {
            dotX = (1 - ((smAngInt - theta)/smAngInt))*(innerCircle/2) + 200;
            qDebug() << "1";
@@ -159,8 +159,8 @@ void handler::voltageReceive(QString voltage, int count, QString time,
         }*/
 
 
-        //below are some mapping statements to show dot in the correct location depending on range set by user
-        if(phi > 0 && phi < lgAngInt)
+    //below are some mapping statements to show dot in the correct location depending on range set by user
+    /*if(phi > 0 && phi < lgAngInt)
         {
             dotY = (1 - ((lgAngInt - phi)/(lgAngInt)))*(thrdCircle/2) + 366.66666666;
         }
@@ -176,7 +176,7 @@ void handler::voltageReceive(QString voltage, int count, QString time,
         {
             dotX = (1 - ((lgAngInt - qFabs(theta))/(lgAngInt)))*(thrdCircle/2) + 200;
         }
-    }
+    }*/
 
     dateTime = time;
 
@@ -184,11 +184,6 @@ void handler::voltageReceive(QString voltage, int count, QString time,
     if (trqUnit == 0)
         voltageNum = voltageNum*0.7375621;
     torqueFlt = qFabs(voltageNum) - subVal;
-
-    if(torqueFlt < tMin)
-    {
-        tMin = torqueFlt;
-    }
 
     if(torqueFlt > tMax)
     {
@@ -203,10 +198,38 @@ void handler::voltageReceive(QString voltage, int count, QString time,
         }
     }
 
-    zeroPos = qCeil(6 *(tMax)/(tMax - tMin));
-    //qDebug() << zeroPos;
+    graphList.append(torqueFlt);
+    if(graphList.size() == 31)
+        graphList.removeFirst();
 
-    diff = qRound(tMax - tMin);
+    for(int y = 0; y <= graphList.size() - 1; y++)
+    {
+        if(graphList.indexOf(graphMax) == -1)
+        {
+            phHigh = 0;
+        }
+        if(graphList.indexOf(graphMin) == -1)
+        {
+            phLow = 0;
+        }
+        if(graphList.at(y) > phHigh)
+        {
+            graphMax = graphList.at(y);
+            phHigh = graphList.at(y);
+        }
+        if(graphList.at(y) < phLow)
+        {
+            graphMin = graphList.at(y);
+            phLow = graphList.at(y);
+        }
+    }
+
+    zeroPos = qCeil(6 *(graphMax)/(graphMax - graphMin));
+    qDebug() << zeroPos;
+    qDebug() << graphMax;
+    qDebug() << graphMin;
+
+    diff = qCeil(graphMax - graphMin);
 
     if(diff < 3000)
     {
@@ -239,15 +262,87 @@ void handler::voltageReceive(QString voltage, int count, QString time,
 
     torqueStr = QString::number(qRound(torqueFlt));                             //values are stored here to be pulled and added to list when timer goes off. These change with every socket
     charLength = torqueStr.size();
+
     if(torqueFlt < 0 && torqueFlt > -1000)
         charLength = charLength-1;
     if (charLength > 3)
     {
         torqueStr.insert(charLength - 3, ",");
     }
-    qDebug() << tMax;
+
+    double uppCompare = graphMax/(zeroPos - 1);
+    double lowCompare = graphMin/(zeroPos - 7);
+
+    if(uppCompare > lowCompare && uppCompare < 1000000)
+    {
+        compare = uppCompare;
+    }
+    if(lowCompare > uppCompare && lowCompare < 1000000)
+    {
+        compare = lowCompare;
+    }
+
+    qDebug() << "lcm: " << lcm << "compare: " << compare;
+    if(lcm < compare)
+    {
+        while(lcm < compare)
+            lcm = lcm + lowEnd;
+    }
+
+    if(zeroPos == 1)
+    {
+        yMax = 0;
+        yMin = -lcm;
+    }
+
+    if(zeroPos == 2)
+    {
+        yMax = (lcm/6);
+        yMin = -(5*lcm/6);
+    }
+
+    if(zeroPos == 3)
+    {
+        yMax = (lcm/3);
+        yMin = -(2*lcm/3);
+    }
+
+    if(zeroPos == 4)
+    {
+        yMax = (lcm/2);
+        yMin = -yMax;
+    }
+    if(zeroPos == 5)
+    {
+        yMax = (2*lcm/3);
+        yMin = -(lcm/3);
+    }
+
+    if(zeroPos == 6)
+    {
+        yMax = (5*lcm/6);
+        yMin = -(lcm/6);
+    }
+
+    if(zeroPos == 7)
+    {
+        yMax = lcm;
+        yMin = 0;
+    }
+
+    if(graphMax > yMax)
+    {
+        while(graphMax > yMax)
+            yMax = yMax + lowEnd;
+    }
+    if(graphMin < yMin)
+    {
+        while(graphMin < yMin)
+            yMin = yMax - lowEnd;
+    }
+
     emit homeDisplay(torqueStr, torqueFlt, tMaxStr, units);
-    emit graphUpdate(torqueFlt, count, cropTime, tMin, tMax, lcm, zeroPos);
+    emit graphUpdate(torqueFlt, count, cropTime, yMin, yMax, lcm, zeroPos);
 }
 
 void handler::failedConnect()
@@ -341,6 +436,15 @@ void handler::storedSettings()
     emit setTapInterval(tapInterval);
     emit stagesSig(stages);
 
+}
+
+void handler::graphReset()
+{
+    emit clearGraph();
+    graphList.clear();
+    count = 0;
+    subVal = torqueFlt;
+    tMax = 0;
 }
 
 void handler::startNew()
@@ -450,7 +554,7 @@ void handler::zeroTorque(QString zeroVoltage)
     int loc = zeroVoltage.indexOf(unitDelimiter);
     QString zeroTorq = zeroVoltage.left(loc);
     zeroTorq.remove(charLength - 3, 1);
-    subVal = zeroTorq.toDouble();                    //this stores the current torque so it can be subtracted from new incoming torques this gives a zero baseline (taring)
+    subVal = zeroTorq.toDouble() + subVal;                    //this stores the current torque so it can be subtracted from new incoming torques this gives a zero baseline (taring)
     qDebug() << subVal;
 }
 

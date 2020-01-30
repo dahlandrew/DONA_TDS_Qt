@@ -37,7 +37,7 @@ public:
     void setDelay(int delay);
 
 signals:
-    void readResults(QString voltage, int count, QString time, qreal theta, qreal psi, qreal phi);
+    void readResults(QString voltage, QString time);
     void gpsData(QString latt, QString longit);
     void successConnect();
     void failedConnect();

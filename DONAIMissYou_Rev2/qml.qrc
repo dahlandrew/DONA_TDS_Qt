@@ -54,5 +54,6 @@
         <file>record_d.png</file>
         <file>stopRecord.png</file>
         <file>HomeForm.ui.qml</file>
+        <file>null.png</file>
     </qresource>
 </RCC>

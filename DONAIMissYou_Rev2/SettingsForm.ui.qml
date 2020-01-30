@@ -24,8 +24,8 @@ Item {
     property alias emailInput: emailInput
     //property alias inclButton: inclButton
     //property alias incl: incl
-    property alias torqueUnitsButton: torqueUnitsButton
-    property alias torqueUnits: torqueUnits
+    //property alias torqueUnitsButton: torqueUnitsButton
+    //property alias torqueUnits: torqueUnits
     //property alias depthInt: depthInt
     //property alias depthUnitTnl: depthUnitTnl
     //property alias depthUnitsButton: depthUnitsButton
@@ -109,7 +109,7 @@ Item {
         anchors.topMargin: 10
         anchors.right: element.right
         anchors.rightMargin: 5
-        height: 201
+        height: 161
         color: "#ffffff"
         z: 0
     }
@@ -157,7 +157,7 @@ Item {
         anchors.fill: languageRect
     }
 
-    Rectangle {
+    /*Rectangle {
         id: torqueUnitsRect
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: languageRect.bottom
@@ -199,7 +199,7 @@ Item {
     MouseArea{
         id: torqueUnitsButton
         anchors.fill: torqueUnitsRect
-    }
+    }*/
 
     /*Rectangle {
         id: depthUnitsRect
@@ -306,7 +306,7 @@ Item {
     Rectangle {
         id: loggingIntRect
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: torqueUnitsRect.bottom
+        anchors.top: languageRect.bottom
         anchors.topMargin: 1
         anchors.right: bckgnd1.right
         height: 40
@@ -510,7 +510,8 @@ Item {
             checked: true
             anchors.right: parent.right
             anchors.rightMargin: 7
-            anchors.top: showDepth.bottom
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
             background: Material.Green
         }
 
@@ -575,9 +576,9 @@ Item {
             height: parent.height
             bottomPadding: 7
             anchors.right: parent.right
-            anchors.bottom: emailRect.bottom
+            anchors.bottom: parent.bottom
             anchors.rightMargin: 7
-            anchors.top: torqueTap.bottom
+            anchors.top: parent.top
             placeholderText: qsTr("--")
             horizontalAlignment: Text.AlignHCenter
             color: "#ffffff"
