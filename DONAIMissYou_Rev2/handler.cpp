@@ -180,7 +180,7 @@ void handler::voltageReceive(QString voltage, QString time, QString battery)
 
     dateTime = time;
 
-    double voltageNum = (voltage.toDouble()/250)*294.3*outputRatio.toDouble()*(qPow(0.975, stages))*1000; //convert voltage sent by cody to torque, it says voltageNum but it is a torque, sorry
+    double voltageNum = (voltage.toDouble()/165)*294.3*outputRatio.toDouble()*(qPow(0.975, stages))*1000; //convert voltage sent by cody to torque, it says voltageNum but it is a torque, sorry
     if (trqUnit == 0)
         voltageNum = voltageNum*0.7375621;
     torqueFlt = qFabs(voltageNum) - subVal;
