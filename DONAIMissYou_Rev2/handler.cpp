@@ -124,7 +124,7 @@ void handler::createCsvThread(handler *handler)
     csvwriter->start();
 }
 
-void handler::voltageReceive(QString voltage, QString time)
+void handler::voltageReceive(QString voltage, QString time, QString battery)
 {
     count++;
     //theta is x direction always
@@ -225,9 +225,6 @@ void handler::voltageReceive(QString voltage, QString time)
     }
 
     zeroPos = qCeil(6 *(graphMax)/(graphMax - graphMin));
-    qDebug() << zeroPos;
-    qDebug() << graphMax;
-    qDebug() << graphMin;
 
     diff = qCeil(graphMax - graphMin);
 
@@ -282,7 +279,6 @@ void handler::voltageReceive(QString voltage, QString time)
         compare = lowCompare;
     }
 
-    qDebug() << "lcm: " << lcm << "compare: " << compare;
     if(lcm < compare)
     {
         while(lcm < compare)
@@ -341,7 +337,7 @@ void handler::voltageReceive(QString voltage, QString time)
             yMin = yMax - lowEnd;
     }
 
-    emit homeDisplay(torqueStr, torqueFlt, tMaxStr, units);
+    emit homeDisplay(torqueStr, torqueFlt, tMaxStr, units, battery);
     emit graphUpdate(torqueFlt, count, cropTime, yMin, yMax, lcm, zeroPos);
 }
 

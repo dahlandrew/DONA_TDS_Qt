@@ -17,6 +17,8 @@ Item
     property alias quickie: quickie
     property alias useragree: useragree
     property alias urlBtn: urlBtn
+    property alias batteryInd: batteryInd
+    property alias batteryAmnt: batteryAmnt
     anchors.fill: parent
 
     Rectangle {
@@ -94,6 +96,26 @@ Item
         height: topRightBorder.height/1.75
         width: height*(123/148)
         source: "qrc:/DONA_d.png"
+    }
+
+    Image {
+        id: batteryInd
+        height: 19
+        width: 37
+        anchors.bottom: topLeftBorder.bottom
+        anchors.bottomMargin: 6
+        anchors.left: element.left
+        anchors.leftMargin: 12
+        source: "qrc:/battery_100.png"
+    }
+
+    Text {
+        id: batteryAmnt
+        anchors.left: batteryInd.right
+        anchors.leftMargin: 6
+        anchors.verticalCenter: batteryInd.verticalCenter
+        font.pointSize: 18
+        text: qsTr("100 %")
     }
 
     Image

@@ -59,6 +59,8 @@ Item {
     property alias remove: remove
     property alias send: send
     property alias view: view
+    property alias batteryInd: batteryInd
+    property alias batteryAmnt: batteryAmnt
 
 
     Rectangle {
@@ -126,6 +128,26 @@ Item {
             PathLine { x: ((svdJbs.width/2)+25); y: (svdJbs.height - 75)}
         }
     }*/
+
+    Image {
+        id: batteryInd
+        height: 19
+        width: 37
+        anchors.bottom: topLeftBorder.bottom
+        anchors.bottomMargin: 6
+        anchors.left: element.left
+        anchors.leftMargin: 12
+        source: "qrc:/battery_100.png"
+    }
+
+    Text {
+        id: batteryAmnt
+        anchors.left: batteryInd.right
+        anchors.leftMargin: 6
+        anchors.verticalCenter: batteryInd.verticalCenter
+        font.pointSize: 18
+        text: qsTr("100 %")
+    }
 
     Popup {
         id: centerPop

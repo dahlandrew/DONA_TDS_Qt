@@ -26,15 +26,15 @@ void tcp:: openConnect()
     TDS = new QTcpSocket();
     TDS->connectToHost("192.168.4.1", 9001);
 
-    if(!TDS->waitForConnected(3000))        //for clarification, connection is not to the the WiFi network, this is socket connection (did I receive a socket?)
+    if(!TDS->waitForConnected())        //for clarification, connection is not to the the WiFi network, this is socket connection (did I receive a socket?)
     {
-        //qDebug() << "Could not Connect to Torque Detection System\n";
+        qDebug() << "Could not Connect to Torque Detection System\n";
         emit failedConnect();           //sends signal to GUI and opens a pop up to let user know they have lost connection
         waitForConnect();               //this function cycles through until new connection is found without reading a blank string, saves time on regaining a connection
     }
     else
     {
-        //qDebug() << "Connected to Torque Dection System\n";
+        qDebug() << "Connected to Torque Dection System\n";
         if(STOP == 0){                  //this does nothing
             tcp::readSocket();
         }
@@ -70,7 +70,7 @@ void tcp::readSocket()
     int back = str.indexOf(bookend, 1);
 
     QString base_str = str.mid(front + 1, back - 1);
-
+    qDebug() << base_str;
     for(int i = 0; i <= 5; i++)
     {
         seg[i] = base_str.indexOf(delimiter);
@@ -102,7 +102,7 @@ void tcp::readSocket()
     time = local.time().toString();
     //timeList.append(time);
 
-    emit readResults(voltage, time);        //send changing values to handler
+    emit readResults(voltage, time, battery);        //send changing values to handler
     emit gpsData(latt, longit);                                     //send gps data, i split them up originally because I read somewhere that you can only send 6 variables in a signal
     /*if (dataLength > 1)                                           //This is true when sending between qml and c++ (i would send one variable at a time bt the two) have not found limit c++ --> c++
     {
@@ -139,7 +139,7 @@ void tcp::waitForConnect()          //this function keeps trying to connect to a
     {
         TDS->connectToHost("192.168.4.1", 9001);
 
-        if(!TDS->waitForConnected(3000))
+        if(!TDS->waitForConnected())
         {
             emit failedConnect();
             //waitForConnect();

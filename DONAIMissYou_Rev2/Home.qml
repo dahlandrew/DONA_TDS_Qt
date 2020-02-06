@@ -31,6 +31,24 @@ HomeForm{
             {
                 rotDir.source = "qrc:/null.png";
             }
+
+            batteryAmnt.text = battery + " %";
+            if(battery > 0 && battery < 25)
+            {
+                batteryInd.source = "qrc:/battery_25.png";
+            }
+            if(battery > 25 && battery < 50)
+            {
+                batteryInd.source = "qrc:/battery_50.png";
+            }
+            if(battery > 50 && battery < 75)
+            {
+                batteryInd.source = "qrc:/battery_75.png";
+            }
+            if(battery > 75 && battery < 100)
+            {
+                batteryInd.source = "qrc:/battery_100.png";
+            }
         }
 
         onWaitForConnect:
@@ -131,6 +149,26 @@ HomeForm{
         font.italic: true
         font.bold: true
         color: "#000000"
+    }
+
+    Image {
+        id: batteryInd
+        height: 19
+        width: 37
+        anchors.bottom: topLeftBorder.bottom
+        anchors.bottomMargin: 6
+        anchors.left: element.left
+        anchors.leftMargin: 12
+        source: "qrc:/battery_100.png"
+    }
+
+    Text {
+        id: batteryAmnt
+        anchors.left: batteryInd.right
+        anchors.leftMargin: 6
+        anchors.verticalCenter: batteryInd.verticalCenter
+        font.pointSize: 18
+        text: qsTr("100 %")
     }
 
     Text {

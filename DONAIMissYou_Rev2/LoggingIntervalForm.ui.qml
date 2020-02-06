@@ -22,6 +22,8 @@ Item {
     property alias thirtySec: thirtySec
     property alias thirtySecButton: thirtySecButton
     property alias thirtySecCheck: thirtySecCheck
+    property alias batteryInd: batteryInd
+    property alias batteryAmnt: batteryAmnt
     anchors.fill: parent
 
     Rectangle {
@@ -88,6 +90,26 @@ Item {
             PathLine { x: ((element.width/2)+25); y: (element.height - 45)}
             PathLine { x: ((element.width/2)+25); y: (element.height - 75)}
         }
+    }
+
+    Image {
+        id: batteryInd
+        height: 19
+        width: 37
+        anchors.bottom: topLeftBorder.bottom
+        anchors.bottomMargin: 6
+        anchors.left: element.left
+        anchors.leftMargin: 12
+        source: "qrc:/battery_100.png"
+    }
+
+    Text {
+        id: batteryAmnt
+        anchors.left: batteryInd.right
+        anchors.leftMargin: 6
+        anchors.verticalCenter: batteryInd.verticalCenter
+        font.pointSize: 18
+        text: qsTr("100 %")
     }
 
     Rectangle {

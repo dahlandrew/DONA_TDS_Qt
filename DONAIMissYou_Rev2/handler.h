@@ -63,7 +63,7 @@ public:
     ~handler();
     void quitThread();
     Q_INVOKABLE void transStart();
-    Q_INVOKABLE void voltageReceive(QString voltage, QString time);
+    Q_INVOKABLE void voltageReceive(QString voltage, QString time, QString battery);
     Q_INVOKABLE void failedConnect();
     Q_INVOKABLE void haltRecord();
     Q_INVOKABLE void torqueUnitSubmit(QString torqueUnitFlg);
@@ -118,7 +118,7 @@ signals:
     void startRecord();
     void stopRecord();
     void waitForConnect();
-    void homeDisplay(QString torqueStr, double torqueFlt, QString tMaxStr, QString units);
+    void homeDisplay(QString torqueStr, double torqueFlt, QString tMaxStr, QString units, QString battery);
     void pdfPrint(QSqlTableModel *model);
     void resetPages();
     void setEmail(QString email);

@@ -28,6 +28,8 @@ Item {
     property alias sixStageCheck: sixStageCheck
     property alias sixStage: sixStage
     property alias sixStageBtn: sixStageBtn
+    property alias batteryInd: batteryInd
+    property alias batteryAmnt: batteryAmnt
     anchors.fill: parent
 
     Rectangle {
@@ -106,6 +108,26 @@ Item {
         font.italic: true
         font.bold: true
         color: "#000000"
+    }
+
+    Image {
+        id: batteryInd
+        height: 19
+        width: 37
+        anchors.bottom: topLeftBorder.bottom
+        anchors.bottomMargin: 6
+        anchors.left: element.left
+        anchors.leftMargin: 12
+        source: "qrc:/battery_100.png"
+    }
+
+    Text {
+        id: batteryAmnt
+        anchors.left: batteryInd.right
+        anchors.leftMargin: 6
+        anchors.verticalCenter: batteryInd.verticalCenter
+        font.pointSize: 18
+        text: qsTr("100 %")
     }
 
     Rectangle {

@@ -55,5 +55,9 @@
         <file>stopRecord.png</file>
         <file>HomeForm.ui.qml</file>
         <file>null.png</file>
+        <file>battery_25.png</file>
+        <file>battery_50.png</file>
+        <file>battery_75.png</file>
+        <file>battery_100.png</file>
     </qresource>
 </RCC>

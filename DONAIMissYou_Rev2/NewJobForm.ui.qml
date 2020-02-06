@@ -31,6 +31,8 @@ Page
     property alias variableSpeed: variableSpeed
     property alias driveModelSelect: driveModelSelect*/
     property alias driveSerialNum: driveSerialNum
+    property alias batteryInd: batteryInd
+    property alias batteryAmnt: batteryAmnt
     /*property alias driveModelColumn: driveModelColumn
     property alias depthInt: depthInt
     property alias depthUnitTnl: depthUnitTnl
@@ -90,6 +92,25 @@ Page
             id: contentCol
             anchors.fill: parent*/
 
+    Image {
+        id: batteryInd
+        height: 19
+        width: 37
+        anchors.bottom: topLeftBorder.bottom
+        anchors.bottomMargin: 6
+        anchors.left: topLeftBorder.left
+        anchors.leftMargin: 12
+        source: "qrc:/battery_100.png"
+    }
+
+    Text {
+        id: batteryAmnt
+        anchors.left: batteryInd.right
+        anchors.leftMargin: 6
+        anchors.verticalCenter: batteryInd.verticalCenter
+        font.pointSize: 18
+        text: qsTr("100 %")
+    }
 
     Text {
         id: jobNameLabel
