@@ -190,7 +190,7 @@ private:
 
     QString svdJbsPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/SavedJobs";
 
-    double subVal = 0, torqueFlt, tMax = 0, tMin = 0, phLow = 0, phHigh = 0, graphMax = 300, graphMin = -300, compare;
+    double voltageNum, subVal = 0, initSub = 0, torqueFlt, tMax = 0, tMin = 0, phLow = 0, phHigh = 0, graphMax = 300, graphMin = -300, compare;
 
     qreal dotX, dotY, innerCircle, scndCircle, thrdCircle, outerCircle;
 

@@ -180,7 +180,7 @@ void handler::voltageReceive(QString voltage, QString time, QString battery)
 
     dateTime = time;
 
-    double voltageNum = (voltage.toDouble()/165)*294.3*outputRatio.toDouble()*(qPow(0.975, stages))*1000; //convert voltage sent by cody to torque, it says voltageNum but it is a torque, sorry
+    voltageNum = (voltage.toDouble()/165)*294.3*outputRatio.toDouble()*(qPow(0.975, stages))*1000; //convert voltage sent by cody to torque, it says voltageNum but it is a torque, sorry
     if (trqUnit == 0)
         voltageNum = voltageNum*0.7375621;
     torqueFlt = qFabs(voltageNum) - subVal;
@@ -546,11 +546,8 @@ void handler::serialNumSub(QString serialNum)
 
 void handler::zeroTorque(QString zeroVoltage)
 {
-    QString unitDelimiter = " ";
-    int loc = zeroVoltage.indexOf(unitDelimiter);
-    QString zeroTorq = zeroVoltage.left(loc);
-    zeroTorq.remove(charLength - 3, 1);
-    subVal = zeroTorq.toDouble() + subVal;                    //this stores the current torque so it can be subtracted from new incoming torques this gives a zero baseline (taring)
+    //this stores the current torque so it can be subtracted from new incoming torques this gives a zero baseline (taring)
+    subVal = voltageNum;
     qDebug() << subVal;
 }
 
