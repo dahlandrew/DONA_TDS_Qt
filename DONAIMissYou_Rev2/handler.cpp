@@ -546,7 +546,11 @@ void handler::serialNumSub(QString serialNum)
 
 void handler::zeroTorque(QString zeroVoltage)
 {
-    //this stores the current torque so it can be subtracted from new incoming torques this gives a zero baseline (taring)
+    /*QString unitDelimiter = " ";
+    int loc = zeroVoltage.indexOf(unitDelimiter);
+    QString zeroTorq = zeroVoltage.left(loc);
+    zeroTorq.remove(charLength - 3, 1);
+    subVal = zeroTorq.toDouble() + subVal;*/                    //this stores the current torque so it can be subtracted from new incoming torques this gives a zero baseline (taring)
     subVal = voltageNum;
     qDebug() << subVal;
 }
