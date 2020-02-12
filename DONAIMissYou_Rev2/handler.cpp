@@ -28,6 +28,7 @@ handler::handler(QObject *parent) : QObject(parent)
 #ifdef Q_OS_IOS
     mPlatformShareUtils = new IosShareUtils(this);
 #endif
+
 }
 
 handler::~handler()
@@ -96,6 +97,14 @@ void handler::timerSlot(handler *handler)
     handler::record();
 }
 
+void handler::graphTimerSlot(handler *handler)
+{
+    QObject::connect(handler, &handler::graphTimerSig, graphTimerThread, &GraphTimer::timer);
+    QObject::connect(graphTimerThread, &GraphTimer::publishGraph, handler, &handler::graphLoad);
+    emit graphTimerSig();
+    handler::graphLoad();
+}
+
 void handler::record() //called when timer goes off to append data to list
 {
     //xAngLst.append(xAng);
@@ -105,6 +114,12 @@ void handler::record() //called when timer goes off to append data to list
     qDebug() << "done";
 }
 
+void handler::graphLoad()
+{
+    count++;
+    emit graphUpdate(torqueFlt, count, cropTime, yMin, yMax, lcm, zeroPos);
+}
+
 void handler::transStart()  //called when record button is hit
 {
     torqueList.clear();     //data is always added to these lists
@@ -112,7 +127,7 @@ void handler::transStart()  //called when record button is hit
     //xAngLst.clear();
     //zAngLst.clear();
 
-    QtConcurrent::run(this, &handler::createCsvThread, this); //starts the pdf thread
+    QtConcurrent::run(this, &handler::createCsvThread, this); //starts the csv thread
     QtConcurrent::run(this, &handler::timerSlot, this); //starts the timer thread
 
 }
@@ -126,7 +141,7 @@ void handler::createCsvThread(handler *handler)
 
 void handler::voltageReceive(QString voltage, QString time, QString battery)
 {
-    count++;
+
     //theta is x direction always
     //phi is y direction on crossheirs but z on accel
     /*if(qSqrt((theta*theta) + (phi*phi)) > 30) //if mag of ang is > 30 (max angle on cross-heirs) than you can't see dot
@@ -185,9 +200,9 @@ void handler::voltageReceive(QString voltage, QString time, QString battery)
         voltageNum = voltageNum*0.7375621;
     torqueFlt = qFabs(voltageNum) - subVal;
 
-    if(torqueFlt > tMax)
+    if(qFabs(torqueFlt) > tMax)
     {
-        tMax = torqueFlt;
+        tMax = qFabs(torqueFlt);
         if(QString::number(qRound(tMax)).length() > 3)
         {
             tMaxStr = QString::number(qRound(tMax)).insert(QString::number(qRound(tMax)).length() - 3, ",");
@@ -228,7 +243,13 @@ void handler::voltageReceive(QString voltage, QString time, QString battery)
 
     diff = qCeil(graphMax - graphMin);
 
-    if(diff < 3000)
+    if(diff < 300)
+    {
+        lcm = diff;
+        lowEnd = 60;
+    }
+
+    if(diff > 300 && diff < 3000)
     {
         lcm = diff;
         lowEnd = 600;
@@ -246,7 +267,7 @@ void handler::voltageReceive(QString voltage, QString time, QString battery)
     }
 
     while(1) {
-        if(lcm%lowEnd==0 ) {
+        if(lcm%lowEnd == 0) {
             break;
         }
         lcm++;
@@ -281,8 +302,27 @@ void handler::voltageReceive(QString voltage, QString time, QString battery)
 
     if(lcm < compare)
     {
-        while(lcm < compare)
-            lcm = lcm + lowEnd;
+        while(1)
+        {
+            if(lcm < compare || lcm%lowEnd != 0)
+            {
+                lcm = lcm + lowEnd;
+            }
+        }
+    }
+
+    if(lcm == 360)
+        lcm = 600;
+    if(lcm == 3600)
+        lcm = 6000;
+    if(lcm == 36000)
+        lcm = 60000;
+
+    while(1) {
+        if(lcm%lowEnd==0 ) {
+            break;
+        }
+        lcm++;
     }
 
     if(zeroPos == 1)
@@ -338,7 +378,7 @@ void handler::voltageReceive(QString voltage, QString time, QString battery)
     }
 
     emit homeDisplay(torqueStr, torqueFlt, tMaxStr, units, battery);
-    emit graphUpdate(torqueFlt, count, cropTime, yMin, yMax, lcm, zeroPos);
+
 }
 
 void handler::failedConnect()
@@ -441,6 +481,10 @@ void handler::graphReset()
     count = 0;
     subVal = torqueFlt;
     tMax = 0;
+
+    QtConcurrent::run(this, &handler::graphTimerSlot, this); //starts the timer thread
+
+    emit graphTimerSig();
 }
 
 void handler::startNew()

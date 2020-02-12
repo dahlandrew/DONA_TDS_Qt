@@ -616,7 +616,7 @@ Page
         horizontalAlignment: Text.AlignHCenter
         color: "#ffffff"
         Material.theme: "Dark"
-        validator: IntValidator{bottom: 0; top: 1000000;}
+        validator: IntValidator{bottom: 0; top: 10000000;}
     }
 
     Button {

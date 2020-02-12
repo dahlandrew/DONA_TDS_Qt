@@ -83,8 +83,11 @@ HomeForm{
             torquePlot.insert(count, count, voltageNum);
             yAxis.min = yMin;
             yAxis.max = yMax;
-            xAxis.max = count;
             xAxis.min = cropTime;
+            if(count > 30)
+            {
+                xAxis.max = count;
+            }
         }
         onClearGraph: {
             torquePlot.removePoints(0, torquePlot.count);
@@ -403,15 +406,15 @@ HomeForm{
         }
         ValueAxis{
             id: yAxis
-            min: -300
-            max: 300
+            min: -30
+            max: 30
             color: "#ffffff"
             gridLineColor: "#ffffff"
             labelsColor: "#ffffff"
             labelFormat: "%i"
             labelsFont:Qt.font({pointSize: 10})
             tickCount: 7
-            tickInterval: 100
+            tickInterval: 10
             tickAnchor: 0
             tickType: yAxis.TicksDynamic
             titleBrush: handler.titleBrush()

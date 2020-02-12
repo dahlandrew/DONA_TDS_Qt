@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         csvwriter.cpp \
+        graphtimer.cpp \
         handler.cpp \
         main.cpp \
         tcp.cpp \
@@ -35,6 +36,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     csvwriter.h \
+    graphtimer.h \
     handler.h \
     tcp.h \
     timer.h

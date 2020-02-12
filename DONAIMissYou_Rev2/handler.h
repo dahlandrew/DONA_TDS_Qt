@@ -51,6 +51,7 @@
 //#include "pdfwriter.h"
 #include "csvwriter.h"
 #include "timer.h"
+#include "graphtimer.h"
 #include "cpp/shareutils.hpp"     //uncomment when you get to sharing properties and bull crap
 
 class handler : public QObject
@@ -106,7 +107,9 @@ public:
     //void dataList(QString voltage, int count, QString time, qreal theta, qreal psi, qreal phi);
     void storeGps(QString latt, QString longit);
     void timerSlot(handler *handler);
+    void graphTimerSlot(handler *handler);
     void record();
+    void graphLoad();
 
     //QString unitDrop();
     //void setUnitDrop(QString units);
@@ -161,6 +164,7 @@ signals:
     void stopTimer();
     void stagesSig(int stages);
     void clearGraph();
+    void graphTimerSig();
 
 public slots:
 
@@ -175,7 +179,7 @@ private:
 
     int index, store, trqUnit, dpthUnit, delay, in[2],
         smAngInt, mdAngInt, lgAngInt, currentDepth = 0, tapInterval,
-        diff, lcm, lowEnd, zeroPos, cropTime = 0, stages = 0, charLength, count = 0, yMax = 300, yMin = -300;
+        diff, lcm, lowEnd, zeroPos, cropTime = 0, stages = 0, charLength, count = 0, yMax = 30, yMin = -30;
 
     QString angle[2], smAng, mdAng, lgAng, orgAng = "10\xB0 , 20\xB0 , 30\xB0", svdJobName,
         outputRatio = "0", svdCustomer, svdLocation, svdTarTor,
@@ -203,6 +207,7 @@ private:
     //pdfWriter* PDFWriter = new pdfWriter();
     csvWriter* csvwriter = new csvWriter();
     timer* timerThread = new timer();
+    GraphTimer* graphTimerThread = new GraphTimer();
     PlatformShareUtils* mPlatformShareUtils;      //uncomment when you get to sharing properties and bull crap
 
     static handler* mInstance;
