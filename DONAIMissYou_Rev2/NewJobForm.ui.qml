@@ -115,6 +115,7 @@ Page
     Text {
         id: jobNameLabel
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 15
         anchors.top: topLeftBorder.bottom
         width: 102
         height: 18
@@ -616,7 +617,7 @@ Page
         horizontalAlignment: Text.AlignHCenter
         color: "#ffffff"
         Material.theme: "Dark"
-        validator: IntValidator{bottom: 0; top: 10000000;}
+        validator: IntValidator{bottom: 0; top: 99999999;}
     }
 
     Button {

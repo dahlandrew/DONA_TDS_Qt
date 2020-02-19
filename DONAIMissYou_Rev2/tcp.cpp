@@ -13,28 +13,31 @@
 
 tcp::tcp(QObject *parent) : QObject(parent)
 {
-
 }
 
 tcp::~tcp()
 {
-
+    TDS->flush();
+    TDS->close();
+    delete TDS;
 }
 
 void tcp:: openConnect()
 {
     TDS = new QTcpSocket();
+    TDS->setSocketOption(QAbstractSocket::KeepAliveOption, true);
     TDS->connectToHost("192.168.4.1", 9001);
+
 
     if(!TDS->waitForConnected())        //for clarification, connection is not to the the WiFi network, this is socket connection (did I receive a socket?)
     {
-        qDebug() << "Could not Connect to Torque Detection System\n";
+        //qDebug() << "Could not Connect to Torque Detection System\n";
         emit failedConnect();           //sends signal to GUI and opens a pop up to let user know they have lost connection
         waitForConnect();               //this function cycles through until new connection is found without reading a blank string, saves time on regaining a connection
     }
     else
     {
-        qDebug() << "Connected to Torque Dection System\n";
+        //qDebug() << "Connected to Torque Dection System\n";
         if(STOP == 0){                  //this does nothing
             tcp::readSocket();
         }
@@ -47,12 +50,11 @@ void tcp:: openConnect()
 
 void tcp::readSocket()
 {
-    TDS->write("TorqueIt\r\n\r\n\r\n");     //you must send a message to the server to let it know that you are ready to receive, the message just must be a string
+    TDS->write("TorqueIt");     //you must send a message to the server to let it know that you are ready to receive, the message just must be a string
     TDS->bytesAvailable();      //check how many bytes are available in socket
     TDS->waitForReadyRead();
     while(TDS->bytesAvailable()>0)      //without this check there is no certainty you will receive the whole string
     {
-
         TDS->waitForReadyRead();
 
         readString = TDS->readAll();        //actually read socket
@@ -61,7 +63,11 @@ void tcp::readSocket()
     }
 
     QString str = readString.toLatin1();
+    //qDebug() << str;
     int size = str.length();
+    //qDebug() << size;
+    if(size%49 != 0)
+        tcp::readSocket();
 
     QString bookend = "/";              //the string is wrapped in /
     QString delimiter = ";";
@@ -69,8 +75,16 @@ void tcp::readSocket()
     int front = str.indexOf(bookend);
     int back = str.indexOf(bookend, 1);
 
-    QString base_str = str.mid(front + 1, back - 1);
-    qDebug() << base_str;
+    if(str.mid(front + 1, back - 1) == "\r\n/")
+    {
+        base_str = str.left(front - 1);
+    }
+    else
+    {
+        base_str = str.mid(front + 1, back - 1);
+    }
+    //qDebug() << base_str;
+
     for(int i = 0; i <= 5; i++)
     {
         seg[i] = base_str.indexOf(delimiter);
@@ -108,9 +122,11 @@ void tcp::readSocket()
     {
        emit buildFile(voltageList, dataLength, timeList);
     }*/
-    TDS->close();                                               //each socket needs to be closed (whether connected succesfully or not or you will see some trippy stuff brother
+    //TDS->close();                                               //each socket needs to be closed (whether connected succesfully or not or you will see some trippy stuff brother
     //QObject().thread()->msleep(1000);
-    tcp::openConnect();                         //start the cycle again baby
+    //tcp::openConnect();                         //start the cycle again baby
+    TDS->flush();
+    tcp::readSocket();
 }
 
 void tcp::close()

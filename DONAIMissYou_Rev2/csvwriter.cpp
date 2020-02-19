@@ -12,9 +12,14 @@ csvWriter::~csvWriter()
 }
 
 void csvWriter::writeCSV(QStringList voltageList, int dataLength,
-                         QStringList timeList, QStringList xAngLst, QStringList zAngLst)
+                         QStringList timeList, QStringList xAngLst, QStringList zAngLst, QString tMaxStr)
 {
-    qDebug() << voltageList;
+    QString comDel = ",";
+    int locMax = tMaxStr.indexOf(comDel);
+    int locTar = tarTor.indexOf(comDel);
+    tMaxStr = tMaxStr.remove(locMax, 1);
+    tarTor = tarTor.remove(locTar, 1);
+
     QDateTime local(QDateTime::currentDateTime());
     QString date = local.date().toString();
 
@@ -39,20 +44,20 @@ void csvWriter::writeCSV(QStringList voltageList, int dataLength,
         QTextStream output(&data);
 
         output << "Dinamic Oil TD System\n"
-               << "Record Name: \t" << jobName << "\n"
-               << "Date: \t" << date << "\n"
-               << "Serial Number: \t" << serNum << "\n"
-               << "Output Ratio: \t" << ratio << "\n"
-               << "Number of Stages: \t" << numStages << "\n"
-               << "Maximum Torque ("+ units +"): \t" << tarTor << "\n"
-               << "Target Torque (" + units + "): \t" << tarTor << "\n"
+               << "Record Name: ," << jobName << "\n"
+               << "Date: ," << date << "\n"
+               << "Serial Number: ," << serNum << "\n"
+               << "Output Ratio: ," << ratio << "\n"
+               << "Number of Stages: ," << numStages << "\n"
+               << "Maximum Torque ("+ units +"): ," << tMaxStr << "\n"
+               << "Target Torque (" + units + "): ," << tarTor << "\n"
                << "\n"
-               << "Time\t" << "Output Torque (" + units + ")\n";
+               << "Time," << "Output Torque (" + units + ")\n";
 
 
         for(int i = 0; i <= dataLength-1; i++)
         {
-            output << timeList[i] << "\t" << voltageList[i] << "\n";
+            output << timeList[i] << "," << voltageList[i] << "\n";
         }
         data.close();
     }

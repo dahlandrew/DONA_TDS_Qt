@@ -21,19 +21,19 @@ WelcomeForm
         onHomeDisplay:
         {
             batteryAmnt.text = battery + " %";
-            if(battery > 0 && battery < 25)
+            if(battery > 0 && battery <= 25)
             {
                 batteryInd.source = "qrc:/battery_25.png";
             }
-            if(battery > 25 && battery < 50)
+            if(battery > 25 && battery <= 50)
             {
                 batteryInd.source = "qrc:/battery_50.png";
             }
-            if(battery > 50 && battery < 75)
+            if(battery > 50 && battery <= 75)
             {
                 batteryInd.source = "qrc:/battery_75.png";
             }
-            if(battery > 75 && battery < 100)
+            if(battery > 75 && battery <= 100)
             {
                 batteryInd.source = "qrc:/battery_100.png";
             }

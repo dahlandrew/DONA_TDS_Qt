@@ -11,7 +11,7 @@ class GraphTimer : public QObject
     Q_OBJECT
 public:
     explicit GraphTimer(QObject *parent = nullptr);
-
+    ~GraphTimer();
     void timer();
     void stop();
 

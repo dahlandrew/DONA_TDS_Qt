@@ -50,7 +50,7 @@ public slots:
 private:
     QTcpSocket *TDS; //torque detection system
 //This was moved from above
-    QString readString, time, data[6], voltage, battery, accel_x, accel_y, accel_z, latt, longit;
+    QString readString, time, data[6], voltage, battery, accel_x, accel_y, accel_z, latt, longit, base_str;
     double aX, aY, aZ, reductRatio, efficiency, torqMult;
     int count = 0, dataLength, STOP = 0,interval = 1000, seg[6];
 };

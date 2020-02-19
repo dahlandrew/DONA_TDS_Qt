@@ -49,7 +49,7 @@ ApplicationWindow {
             anchors.leftMargin: toolBar.left
 
             Text {
-                text: stackView.depth > 1 ? "\u25C0" : "="
+                text: stackView.depth > 1 ? "\u25C4" : "="
                 color: "black"
                 font.pixelSize: stackView.depth > 1 ? Qt.application.font.pixelSize * 1.6 : Qt.application.font.pixelSize * 3
                 anchors.centerIn: parent

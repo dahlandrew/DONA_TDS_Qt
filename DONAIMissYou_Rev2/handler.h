@@ -145,7 +145,7 @@ signals:
     void csvHeadersSig(QString svdJobName, QString svdCustomer, QString svdLocation, QString svdTarTor,
                         QString svdSerNum, int trqUnit, QString outputRatio, int stages);
     void graphUpdate(double voltageNum, int count, int cropTime, int yMin, int yMax, int lcm, int zeroPos);
-    void buildFile(QStringList voltageList, int dataLength, QStringList timeList, QStringList xAngLst, QStringList zAngLst);
+    void buildFile(QStringList voltageList, int dataLength, QStringList timeList, QStringList xAngLst, QStringList zAngLst, QString tMaxStr);
     void openTCP();
     void setAngle(QString orgAng, QString smAng, QString mdAng, QString lgAng);
     void depthIntSig(QString depthInteger);
@@ -165,6 +165,7 @@ signals:
     void stagesSig(int stages);
     void clearGraph();
     void graphTimerSig();
+    void graphTimeStop();
 
 public slots:
 

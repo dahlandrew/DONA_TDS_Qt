@@ -10,7 +10,13 @@
 
 timer::timer(QObject *parent) : QObject(parent)
 {
+    QObject::connect(recTimer, SIGNAL(timeout()), this, SLOT(record()));        //timer automatically emits a timeout() signal which then notifiies the handler function it is time to record
+}
 
+timer::~timer()
+{
+    recTimer->stop();
+    delete recTimer;
 }
 
 void timer::timerSet(int delay)
@@ -23,7 +29,6 @@ void timer::timerSlot()
 {
     recTimer->setInterval(recDelay*1000);
     recTimer->start();      //starts timer of delay seconds set by user
-    QObject::connect(recTimer, SIGNAL(timeout()), this, SLOT(record()));        //timer automatically emits a timeout() signal which then notifiies the handler function it is time to record
 }
 
 void timer::stop()

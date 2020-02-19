@@ -31,7 +31,7 @@ public:
     explicit csvWriter(QObject *parent = nullptr);
     ~csvWriter();
 
-    void writeCSV(QStringList voltageList, int dataLength, QStringList timeList, QStringList xAngLst, QStringList zAngLst);
+    void writeCSV(QStringList voltageList, int dataLength, QStringList timeList, QStringList xAngLst, QStringList zAngLst, QString tMaxStr);
     void csvInputs(QString svdJobName, QString svdCustomer, QString svdLocation, QString svdTarTor,
                    QString svdSerNum, int trqUnit, QString outputRatio, int stages);
     void start();

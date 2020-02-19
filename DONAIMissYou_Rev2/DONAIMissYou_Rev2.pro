@@ -79,4 +79,9 @@ HEADERS +=\
     cpp/shareutils.hpp \
     cpp/ios/docviewcontroller.hpp \
     cpp/ios/iosshareutils.hpp
+
+DISTFILES += \
+    ios/Launch.storyboard
 }
+
+

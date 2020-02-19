@@ -46,6 +46,7 @@ void handler::initialize()
     //birth of TCP thread so connections can be received w/o locking up other operations
     //Has to be started in main thread
     QtConcurrent::run(this, &handler::createTcpThread, this);
+    QtConcurrent::run(this, &handler::graphTimerSlot, this); //starts the timer thread
 }
 
 void handler::createTcpThread(handler* handler)
@@ -90,18 +91,19 @@ void handler::timerSlot(handler *handler)
     //this function has all the connections for the timer thread
     //timer thread is used to notify when to grab current socket and save that current socket
     //timer is set by sampling rate from UI input
-    QObject::connect(handler, &handler::startTimer, timerThread, &timer::timerSet);
-    QObject::connect(timerThread, &timer::timerNote, handler, &handler::record);
-    QObject::connect(handler, &handler::stopTimer, timerThread, &timer::stop);
+    QObject::connect(handler, &handler::startTimer, timerThread, &timer::timerSet, Qt::QueuedConnection);
+    QObject::connect(timerThread, &timer::timerNote, handler, &handler::record, Qt::QueuedConnection);
+    QObject::connect(handler, &handler::stopTimer, timerThread, &timer::stop, Qt::QueuedConnection);
     emit startTimer(delay);
     handler::record();
 }
 
 void handler::graphTimerSlot(handler *handler)
 {
-    QObject::connect(handler, &handler::graphTimerSig, graphTimerThread, &GraphTimer::timer);
-    QObject::connect(graphTimerThread, &GraphTimer::publishGraph, handler, &handler::graphLoad);
-    emit graphTimerSig();
+    QObject::connect(handler, &handler::graphTimerSig, graphTimerThread, &GraphTimer::timer, Qt::QueuedConnection);
+    QObject::connect(graphTimerThread, &GraphTimer::publishGraph, handler, &handler::graphLoad, Qt::QueuedConnection);
+    QObject::connect(handler, &handler::graphTimeStop, graphTimerThread, &GraphTimer::stop, Qt::QueuedConnection);
+    //emit graphTimerSig();
     handler::graphLoad();
 }
 
@@ -111,11 +113,12 @@ void handler::record() //called when timer goes off to append data to list
     //zAngLst.append(zAng);
     torqueList.append(torqueStr);
     timeList.append(dateTime);
-    qDebug() << "done";
+    //qDebug() << "done";
 }
 
 void handler::graphLoad()
 {
+    //qDebug() << count;
     count++;
     emit graphUpdate(torqueFlt, count, cropTime, yMin, yMax, lcm, zeroPos);
 }
@@ -287,7 +290,7 @@ void handler::voltageReceive(QString voltage, QString time, QString battery)
     {
         torqueStr.insert(charLength - 3, ",");
     }
-
+  
     double uppCompare = graphMax/(zeroPos - 1);
     double lowCompare = graphMin/(zeroPos - 7);
 
@@ -319,7 +322,7 @@ void handler::voltageReceive(QString voltage, QString time, QString battery)
         lcm = 60000;
 
     while(1) {
-        if(lcm%lowEnd==0 ) {
+        if(lcm%lowEnd == 0 ) {
             break;
         }
         lcm++;
@@ -392,7 +395,7 @@ void handler::haltRecord()
     int dataLength = torqueList.size();
     emit csvHeadersSig( svdJobName, svdCustomer, svdLocation, svdTarTor,
                         svdSerNum, trqUnit, outputRatio, stages);
-    emit buildFile(torqueList, dataLength, timeList, xAngLst, zAngLst);
+    emit buildFile(torqueList, dataLength, timeList, xAngLst, zAngLst, tMaxStr);
     emit stopTimer();
     //pdfThread.quit();
 }
@@ -476,13 +479,12 @@ void handler::storedSettings()
 
 void handler::graphReset()
 {
+    subVal = voltageNum;
+    count = 0;
+    tMax = 0;
+    cropTime = 0;
     emit clearGraph();
     graphList.clear();
-    count = 0;
-    subVal = torqueFlt;
-    tMax = 0;
-
-    QtConcurrent::run(this, &handler::graphTimerSlot, this); //starts the timer thread
 
     emit graphTimerSig();
 }
@@ -490,6 +492,7 @@ void handler::graphReset()
 void handler::startNew()
 {
     emit resetPages();
+    emit graphTimeStop();
 }
 
 void handler::email(QString emailString)

@@ -59,6 +59,42 @@ Item {
     property alias remove: remove
     property alias send: send
     property alias view: view
+    property alias centerPop2: centerPop2
+    property alias remove2: remove2
+    property alias send2: send2
+    property alias view2: view2
+    property alias centerPop3: centerPop3
+    property alias remove3: remove3
+    property alias send3: send3
+    property alias view3: view3
+    property alias centerPop4: centerPop4
+    property alias remove4: remove4
+    property alias send4: send4
+    property alias view4: view4
+    property alias centerPop5: centerPop5
+    property alias remove5: remove5
+    property alias send5: send5
+    property alias view5: view5
+    property alias centerPop6: centerPop6
+    property alias remove6: remove6
+    property alias send6: send6
+    property alias view6: view6
+    property alias centerPop7: centerPop7
+    property alias remove7: remove7
+    property alias send7: send7
+    property alias view7: view7
+    property alias centerPop8: centerPop8
+    property alias remove8: remove8
+    property alias send8: send8
+    property alias view8: view8
+    property alias centerPop9: centerPop9
+    property alias remove9: remove9
+    property alias send9: send9
+    property alias view9: view9
+    property alias centerPop10: centerPop10
+    property alias remove10: remove10
+    property alias send10: send10
+    property alias view10: view10
     property alias batteryInd: batteryInd
     property alias batteryAmnt: batteryAmnt
 
@@ -96,7 +132,7 @@ Item {
         }
     }
 
-   /*Rectangle {
+    /*Rectangle {
         id: bottomRightBorder
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -135,7 +171,7 @@ Item {
         width: 37
         anchors.bottom: topLeftBorder.bottom
         anchors.bottomMargin: 6
-        anchors.left: element.left
+        anchors.left: svdJbs.left
         anchors.leftMargin: 12
         source: "qrc:/battery_100.png"
     }
@@ -235,6 +271,822 @@ Item {
                 color: "#ffffff"
                 anchors.horizontalCenter: baseItem.horizontalCenter
                 anchors.bottom: cenQues.top
+                anchors.bottomMargin: 15
+            }
+        }
+    }
+
+    Popup {
+        id: centerPop2
+        anchors.centerIn: svdJbs
+        height: 150
+        width: 250
+        dim: true
+        contentItem:
+            Item {
+            id: baseItem2
+            anchors.fill: centerPop2
+            Button {
+                id: view2
+                anchors.bottom: baseItem2.bottom
+                anchors.right: send2.left
+                anchors.rightMargin: 5
+                Material.background: "#000000"
+                text: qsTr("View")
+                contentItem: Text {
+                    text: view2.text
+                    font: view2.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: send2
+                anchors.bottom: baseItem2.bottom
+                anchors.horizontalCenter: baseItem2.horizontalCenter
+                anchors.rightMargin: 10
+                Material.background: "#000000"
+                text: qsTr("email")
+                contentItem: Text {
+                    text: send2.text
+                    font: send2.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: remove2
+                anchors.bottom: baseItem2.bottom
+                anchors.left: send2.right
+                anchors.leftMargin: 5
+                Material.background: "#000000"
+                text: qsTr("Remove")
+                contentItem: Text {
+                    text: remove2.text
+                    font: remove2.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: baseItem2.horizontalCenter
+                anchors.left: baseItem2.left
+                anchors.leftMargin: 10
+                anchors.bottom: send2.top
+                anchors.bottomMargin: 5
+                height: 1
+                color: "#ffffff"
+            }
+
+            Text {
+                id: cenQues2
+                text: qsTr("What would you like to do?")
+                font.family: "Arial"
+                font.pointSize: 10
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem2.horizontalCenter
+                anchors.bottom: send2.top
+                anchors.bottomMargin: 15
+            }
+
+            Text {
+                id: cenTitle2
+                text: qsTr("Saved Jobs Menu")
+                font.family: "Arial"
+                font.pointSize: 10
+                font.bold: true
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem2.horizontalCenter
+                anchors.bottom: cenQues2.top
+                anchors.bottomMargin: 15
+            }
+        }
+    }
+    Popup {
+        id: centerPop3
+        anchors.centerIn: svdJbs
+        height: 150
+        width: 250
+        dim: true
+        contentItem:
+            Item {
+            id: baseItem3
+            anchors.fill: centerPop3
+            Button {
+                id: view3
+                anchors.bottom: baseItem3.bottom
+                anchors.right: send3.left
+                anchors.rightMargin: 5
+                Material.background: "#000000"
+                text: qsTr("View")
+                contentItem: Text {
+                    text: view3.text
+                    font: view3.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: send3
+                anchors.bottom: baseItem3.bottom
+                anchors.horizontalCenter: baseItem3.horizontalCenter
+                anchors.rightMargin: 10
+                Material.background: "#000000"
+                text: qsTr("email")
+                contentItem: Text {
+                    text: send3.text
+                    font: send3.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: remove3
+                anchors.bottom: baseItem3.bottom
+                anchors.left: send3.right
+                anchors.leftMargin: 5
+                Material.background: "#000000"
+                text: qsTr("Remove")
+                contentItem: Text {
+                    text: remove3.text
+                    font: remove3.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: baseItem3.horizontalCenter
+                anchors.left: baseItem3.left
+                anchors.leftMargin: 10
+                anchors.bottom: send3.top
+                anchors.bottomMargin: 5
+                height: 1
+                color: "#ffffff"
+            }
+
+            Text {
+                id: cenQues3
+                text: qsTr("What would you like to do?")
+                font.family: "Arial"
+                font.pointSize: 10
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem3.horizontalCenter
+                anchors.bottom: send3.top
+                anchors.bottomMargin: 15
+            }
+
+            Text {
+                id: cenTitle3
+                text: qsTr("Saved Jobs Menu")
+                font.family: "Arial"
+                font.pointSize: 10
+                font.bold: true
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem3.horizontalCenter
+                anchors.bottom: cenQues3.top
+                anchors.bottomMargin: 15
+            }
+        }
+    }
+
+    Popup {
+        id: centerPop4
+        anchors.centerIn: svdJbs
+        height: 150
+        width: 250
+        dim: true
+        contentItem:
+            Item {
+            id: baseItem4
+            anchors.fill: centerPop4
+            Button {
+                id: view4
+                anchors.bottom: baseItem4.bottom
+                anchors.right: send4.left
+                anchors.rightMargin: 5
+                Material.background: "#000000"
+                text: qsTr("View")
+                contentItem: Text {
+                    text: view4.text
+                    font: view4.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: send4
+                anchors.bottom: baseItem4.bottom
+                anchors.horizontalCenter: baseItem4.horizontalCenter
+                anchors.rightMargin: 10
+                Material.background: "#000000"
+                text: qsTr("email")
+                contentItem: Text {
+                    text: send4.text
+                    font: send4.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: remove4
+                anchors.bottom: baseItem4.bottom
+                anchors.left: send4.right
+                anchors.leftMargin: 5
+                Material.background: "#000000"
+                text: qsTr("Remove")
+                contentItem: Text {
+                    text: remove4.text
+                    font: remove4.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: baseItem4.horizontalCenter
+                anchors.left: baseItem4.left
+                anchors.leftMargin: 10
+                anchors.bottom: send4.top
+                anchors.bottomMargin: 5
+                height: 1
+                color: "#ffffff"
+            }
+
+            Text {
+                id: cenQues4
+                text: qsTr("What would you like to do?")
+                font.family: "Arial"
+                font.pointSize: 10
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem4.horizontalCenter
+                anchors.bottom: send4.top
+                anchors.bottomMargin: 15
+            }
+
+            Text {
+                id: cenTitle4
+                text: qsTr("Saved Jobs Menu")
+                font.family: "Arial"
+                font.pointSize: 10
+                font.bold: true
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem4.horizontalCenter
+                anchors.bottom: cenQues4.top
+                anchors.bottomMargin: 15
+            }
+        }
+    }
+
+    Popup {
+        id: centerPop5
+        anchors.centerIn: svdJbs
+        height: 150
+        width: 250
+        dim: true
+        contentItem:
+            Item {
+            id: baseItem5
+            anchors.fill: centerPop5
+            Button {
+                id: view5
+                anchors.bottom: baseItem5.bottom
+                anchors.right: send5.left
+                anchors.rightMargin: 5
+                Material.background: "#000000"
+                text: qsTr("View")
+                contentItem: Text {
+                    text: view5.text
+                    font: view5.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: send5
+                anchors.bottom: baseItem5.bottom
+                anchors.horizontalCenter: baseItem5.horizontalCenter
+                anchors.rightMargin: 10
+                Material.background: "#000000"
+                text: qsTr("email")
+                contentItem: Text {
+                    text: send5.text
+                    font: send5.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: remove5
+                anchors.bottom: baseItem5.bottom
+                anchors.left: send5.right
+                anchors.leftMargin: 5
+                Material.background: "#000000"
+                text: qsTr("Remove")
+                contentItem: Text {
+                    text: remove5.text
+                    font: remove5.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: baseItem5.horizontalCenter
+                anchors.left: baseItem5.left
+                anchors.leftMargin: 10
+                anchors.bottom: send5.top
+                anchors.bottomMargin: 5
+                height: 1
+                color: "#ffffff"
+            }
+
+            Text {
+                id: cenQues5
+                text: qsTr("What would you like to do?")
+                font.family: "Arial"
+                font.pointSize: 10
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem5.horizontalCenter
+                anchors.bottom: send5.top
+                anchors.bottomMargin: 15
+            }
+
+            Text {
+                id: cenTitle5
+                text: qsTr("Saved Jobs Menu")
+                font.family: "Arial"
+                font.pointSize: 10
+                font.bold: true
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem5.horizontalCenter
+                anchors.bottom: cenQues5.top
+                anchors.bottomMargin: 15
+            }
+        }
+    }
+
+    Popup {
+        id: centerPop6
+        anchors.centerIn: svdJbs
+        height: 150
+        width: 250
+        dim: true
+        contentItem:
+            Item {
+            id: baseItem6
+            anchors.fill: centerPop6
+            Button {
+                id: view6
+                anchors.bottom: baseItem6.bottom
+                anchors.right: send6.left
+                anchors.rightMargin: 5
+                Material.background: "#000000"
+                text: qsTr("View")
+                contentItem: Text {
+                    text: view6.text
+                    font: view6.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: send6
+                anchors.bottom: baseItem6.bottom
+                anchors.horizontalCenter: baseItem6.horizontalCenter
+                anchors.rightMargin: 10
+                Material.background: "#000000"
+                text: qsTr("email")
+                contentItem: Text {
+                    text: send6.text
+                    font: send6.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: remove6
+                anchors.bottom: baseItem6.bottom
+                anchors.left: send6.right
+                anchors.leftMargin: 5
+                Material.background: "#000000"
+                text: qsTr("Remove")
+                contentItem: Text {
+                    text: remove6.text
+                    font: remove6.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: baseItem6.horizontalCenter
+                anchors.left: baseItem6.left
+                anchors.leftMargin: 10
+                anchors.bottom: send6.top
+                anchors.bottomMargin: 5
+                height: 1
+                color: "#ffffff"
+            }
+
+            Text {
+                id: cenQues6
+                text: qsTr("What would you like to do?")
+                font.family: "Arial"
+                font.pointSize: 10
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem6.horizontalCenter
+                anchors.bottom: send6.top
+                anchors.bottomMargin: 15
+            }
+
+            Text {
+                id: cenTitle6
+                text: qsTr("Saved Jobs Menu")
+                font.family: "Arial"
+                font.pointSize: 10
+                font.bold: true
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem6.horizontalCenter
+                anchors.bottom: cenQues6.top
+                anchors.bottomMargin: 15
+            }
+        }
+    }
+    Popup {
+        id: centerPop7
+        anchors.centerIn: svdJbs
+        height: 150
+        width: 250
+        dim: true
+        contentItem:
+            Item {
+            id: baseItem7
+            anchors.fill: centerPop7
+            Button {
+                id: view7
+                anchors.bottom: baseItem7.bottom
+                anchors.right: send7.left
+                anchors.rightMargin: 5
+                Material.background: "#000000"
+                text: qsTr("View")
+                contentItem: Text {
+                    text: view7.text
+                    font: view7.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: send7
+                anchors.bottom: baseItem7.bottom
+                anchors.horizontalCenter: baseItem7.horizontalCenter
+                anchors.rightMargin: 10
+                Material.background: "#000000"
+                text: qsTr("email")
+                contentItem: Text {
+                    text: send7.text
+                    font: send7.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: remove7
+                anchors.bottom: baseItem7.bottom
+                anchors.left: send7.right
+                anchors.leftMargin: 5
+                Material.background: "#000000"
+                text: qsTr("Remove")
+                contentItem: Text {
+                    text: remove7.text
+                    font: remove7.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: baseItem7.horizontalCenter
+                anchors.left: baseItem7.left
+                anchors.leftMargin: 10
+                anchors.bottom: send7.top
+                anchors.bottomMargin: 5
+                height: 1
+                color: "#ffffff"
+            }
+
+            Text {
+                id: cenQues7
+                text: qsTr("What would you like to do?")
+                font.family: "Arial"
+                font.pointSize: 10
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem7.horizontalCenter
+                anchors.bottom: send7.top
+                anchors.bottomMargin: 15
+            }
+
+            Text {
+                id: cenTitle7
+                text: qsTr("Saved Jobs Menu")
+                font.family: "Arial"
+                font.pointSize: 10
+                font.bold: true
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem7.horizontalCenter
+                anchors.bottom: cenQues7.top
+                anchors.bottomMargin: 15
+            }
+        }
+    }
+    Popup {
+        id: centerPop8
+        anchors.centerIn: svdJbs
+        height: 150
+        width: 250
+        dim: true
+        contentItem:
+            Item {
+            id: baseItem8
+            anchors.fill: centerPop8
+            Button {
+                id: view8
+                anchors.bottom: baseItem8.bottom
+                anchors.right: send8.left
+                anchors.rightMargin: 5
+                Material.background: "#000000"
+                text: qsTr("View")
+                contentItem: Text {
+                    text: view8.text
+                    font: view8.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: send8
+                anchors.bottom: baseItem8.bottom
+                anchors.horizontalCenter: baseItem8.horizontalCenter
+                anchors.rightMargin: 10
+                Material.background: "#000000"
+                text: qsTr("email")
+                contentItem: Text {
+                    text: send8.text
+                    font: send8.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: remove8
+                anchors.bottom: baseItem8.bottom
+                anchors.left: send8.right
+                anchors.leftMargin: 5
+                Material.background: "#000000"
+                text: qsTr("Remove")
+                contentItem: Text {
+                    text: remove8.text
+                    font: remove8.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: baseItem8.horizontalCenter
+                anchors.left: baseItem8.left
+                anchors.leftMargin: 10
+                anchors.bottom: send8.top
+                anchors.bottomMargin: 5
+                height: 1
+                color: "#ffffff"
+            }
+
+            Text {
+                id: cenQues8
+                text: qsTr("What would you like to do?")
+                font.family: "Arial"
+                font.pointSize: 10
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem8.horizontalCenter
+                anchors.bottom: send8.top
+                anchors.bottomMargin: 15
+            }
+
+            Text {
+                id: cenTitle8
+                text: qsTr("Saved Jobs Menu")
+                font.family: "Arial"
+                font.pointSize: 10
+                font.bold: true
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem8.horizontalCenter
+                anchors.bottom: cenQues8.top
+                anchors.bottomMargin: 15
+            }
+        }
+    }
+
+    Popup {
+        id: centerPop9
+        anchors.centerIn: svdJbs
+        height: 150
+        width: 250
+        dim: true
+        contentItem:
+            Item {
+            id: baseItem9
+            anchors.fill: centerPop9
+            Button {
+                id: view9
+                anchors.bottom: baseItem9.bottom
+                anchors.right: send9.left
+                anchors.rightMargin: 5
+                Material.background: "#000000"
+                text: qsTr("View")
+                contentItem: Text {
+                    text: view9.text
+                    font: view9.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: send9
+                anchors.bottom: baseItem9.bottom
+                anchors.horizontalCenter: baseItem9.horizontalCenter
+                anchors.rightMargin: 10
+                Material.background: "#000000"
+                text: qsTr("email")
+                contentItem: Text {
+                    text: send9.text
+                    font: send9.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: remove9
+                anchors.bottom: baseItem9.bottom
+                anchors.left: send9.right
+                anchors.leftMargin: 5
+                Material.background: "#000000"
+                text: qsTr("Remove")
+                contentItem: Text {
+                    text: remove9.text
+                    font: remove9.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: baseItem9.horizontalCenter
+                anchors.left: baseItem9.left
+                anchors.leftMargin: 10
+                anchors.bottom: send9.top
+                anchors.bottomMargin: 5
+                height: 1
+                color: "#ffffff"
+            }
+
+            Text {
+                id: cenQues9
+                text: qsTr("What would you like to do?")
+                font.family: "Arial"
+                font.pointSize: 10
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem9.horizontalCenter
+                anchors.bottom: send9.top
+                anchors.bottomMargin: 15
+            }
+
+            Text {
+                id: cenTitle9
+                text: qsTr("Saved Jobs Menu")
+                font.family: "Arial"
+                font.pointSize: 10
+                font.bold: true
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem9.horizontalCenter
+                anchors.bottom: cenQues9.top
+                anchors.bottomMargin: 15
+            }
+        }
+    }
+
+    Popup {
+        id: centerPop10
+        anchors.centerIn: svdJbs
+        height: 150
+        width: 250
+        dim: true
+        contentItem:
+            Item {
+            id: baseItem10
+            anchors.fill: centerPop10
+            Button {
+                id: view10
+                anchors.bottom: baseItem10.bottom
+                anchors.right: send10.left
+                anchors.rightMargin: 5
+                Material.background: "#000000"
+                text: qsTr("View")
+                contentItem: Text {
+                    text: view10.text
+                    font: view10.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: send10
+                anchors.bottom: baseItem10.bottom
+                anchors.horizontalCenter: baseItem10.horizontalCenter
+                anchors.rightMargin: 10
+                Material.background: "#000000"
+                text: qsTr("email")
+                contentItem: Text {
+                    text: send10.text
+                    font: send10.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            Button {
+                id: remove10
+                anchors.bottom: baseItem10.bottom
+                anchors.left: send10.right
+                anchors.leftMargin: 5
+                Material.background: "#000000"
+                text: qsTr("Remove")
+                contentItem: Text {
+                    text: remove10.text
+                    font: remove10.font
+                    color: "#ffffff"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: baseItem10.horizontalCenter
+                anchors.left: baseItem10.left
+                anchors.leftMargin: 10
+                anchors.bottom: send10.top
+                anchors.bottomMargin: 5
+                height: 1
+                color: "#ffffff"
+            }
+
+            Text {
+                id: cenQues10
+                text: qsTr("What would you like to do?")
+                font.family: "Arial"
+                font.pointSize: 10
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem10.horizontalCenter
+                anchors.bottom: send10.top
+                anchors.bottomMargin: 15
+            }
+
+            Text {
+                id: cenTitle10
+                text: qsTr("Saved Jobs Menu")
+                font.family: "Arial"
+                font.pointSize: 10
+                font.bold: true
+                color: "#ffffff"
+                anchors.horizontalCenter: baseItem10.horizontalCenter
+                anchors.bottom: cenQues10.top
                 anchors.bottomMargin: 15
             }
         }

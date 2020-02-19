@@ -10,7 +10,7 @@ class timer : public QObject
     Q_OBJECT
 public:
     explicit timer(QObject *parent = nullptr);
-
+    ~timer();
     void timerSet(int delay);
     void timerSlot();
     void stop();

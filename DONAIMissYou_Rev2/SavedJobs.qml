@@ -53,15 +53,141 @@ SavedJobsForm {
         handler.savedJobsCall();
         centerPop.close();
     }
-    scndBtn.onClicked: handler.viewFile(scndJS.text+".csv")
-    thrdBtn.onClicked: handler.viewFile(thrdJS.text+".csv")
-    frthBtn.onClicked: handler.viewFile(frthJS.text+".csv")
-    ffthBtn.onClicked: handler.viewFile(ffthJS.text+".csv")
-    sxthBtn.onClicked: handler.viewFile(sxthJS.text+".csv")
-    svnthBtn.onClicked: handler.viewFile(svnthJS.text+".csv")
-    eighthBtn.onClicked: handler.viewFile(eighthJS.text+".csv")
-    nnthBtn.onClicked: handler.viewFile(nnthJS.text+".csv")
-    tnthBtn.onClicked: handler.viewFile(tnthJS.text+".csv")
+    scndBtn.onClicked: centerPop2.open();
+    view2.onClicked:{
+
+        handler.viewFile(scndJS.text+".csv")
+        centerPop2.close();
+    }
+    send2.onClicked: {
+        handler.sendFile(scndJS.text+".csv")
+        centerPop2.close();
+    }
+    remove2.onClicked: {
+        handler.remove(scndJS.text+".csv")
+        handler.savedJobsCall();
+        centerPop2.close();
+    }
+    thrdBtn.onClicked: centerPop3.open();
+    view3.onClicked:{
+
+        handler.viewFile(thrdJS.text+".csv")
+        centerPop3.close();
+    }
+    send3.onClicked: {
+        handler.sendFile(thrdJS.text+".csv")
+        centerPop3.close();
+    }
+    remove3.onClicked: {
+        handler.remove(thrdJS.text+".csv")
+        handler.savedJobsCall();
+        centerPop3.close();
+    }
+    frthBtn.onClicked: centerPop4.open();
+    view4.onClicked:{
+
+        handler.viewFile(frthJS.text+".csv")
+        centerPop4.close();
+    }
+    send4.onClicked: {
+        handler.sendFile(frthJS.text+".csv")
+        centerPop4.close();
+    }
+    remove4.onClicked: {
+        handler.remove(frthJS.text+".csv")
+        handler.savedJobsCall();
+        centerPop4.close();
+    }
+    ffthBtn.onClicked: centerPop5.open();
+    view5.onClicked:{
+
+        handler.viewFile(ffthJS.text+".csv")
+        centerPop5.close();
+    }
+    send5.onClicked: {
+        handler.sendFile(ffthJS.text+".csv")
+        centerPop5.close();
+    }
+    remove5.onClicked: {
+        handler.remove(ffthJS.text+".csv")
+        handler.savedJobsCall();
+        centerPop5.close();
+    }
+    sxthBtn.onClicked: centerPop6.open();
+    view6.onClicked:{
+
+        handler.viewFile(sxthJS.text+".csv")
+        centerPop6.close();
+    }
+    send6.onClicked: {
+        handler.sendFile(sxthJS.text+".csv")
+        centerPop6.close();
+    }
+    remove6.onClicked: {
+        handler.remove(sxthJS.text+".csv")
+        handler.savedJobsCall();
+        centerPop6.close();
+    }
+    svnthBtn.onClicked: centerPop7.open();
+    view7.onClicked:{
+
+        handler.viewFile(svnthJS.text+".csv")
+        centerPop7.close();
+    }
+    send7.onClicked: {
+        handler.sendFile(svnthJS.text+".csv")
+        centerPop7.close();
+    }
+    remove7.onClicked: {
+        handler.remove(svnthJS.text+".csv")
+        handler.savedJobsCall();
+        centerPop7.close();
+    }
+    eighthBtn.onClicked: centerPop8.open();
+    view8.onClicked:{
+
+        handler.viewFile(eighthJS.text+".csv")
+        centerPop8.close();
+    }
+    send8.onClicked: {
+        handler.sendFile(eighthJS.text+".csv")
+        centerPop8.close();
+    }
+    remove8.onClicked: {
+        handler.remove(eighthJS.text+".csv")
+        handler.savedJobsCall();
+        centerPop8.close();
+    }
+    nnthBtn.onClicked: centerPop9.open();
+    view9.onClicked:{
+
+        handler.viewFile(nnthJS.text+".csv")
+        centerPop9.close();
+    }
+    send9.onClicked: {
+        handler.sendFile(nnthJS.text+".csv")
+        centerPop9.close();
+    }
+    remove9.onClicked: {
+        handler.remove(nnthJS.text+".csv")
+        handler.savedJobsCall();
+        centerPop9.close();
+    }
+    tnthBtn.onClicked: centerPop10.open();
+    view10.onClicked:{
+
+        handler.viewFile(tnthJS.text+".csv")
+        centerPop10.close();
+    }
+    send10.onClicked: {
+        handler.sendFile(tnthJS.text+".csv")
+        centerPop10.close();
+    }
+    remove10.onClicked: {
+        handler.remove(tnthJS.text+".csv")
+        handler.savedJobsCall();
+        centerPop10.close();
+    }
 
     Connections {
         target: handler
@@ -71,10 +197,12 @@ SavedJobsForm {
             {
                 frstRect.visible = false;
                 frstJS.text = frstJb;
+                bckgnd1.visible = false;
             }
             else
             {
                 frstRect.visible = true;
+                bckgnd1.visible = true;
                 frstJS.text = frstJb;
                 frstDate.text = frstDt;
             }
@@ -91,6 +219,7 @@ SavedJobsForm {
                 scndRect.visible = true;
                 scndJS.text = scndJb;
                 scndDate.text = scndDt;
+                bckgnd1.visible = true;
             }
         }
         onThrdSvdJobSig:
@@ -105,6 +234,7 @@ SavedJobsForm {
                 thrdRect.visible = true;
                 thrdJS.text = thrdJb;
                 thrdDate.text = thrdDt;
+                bckgnd1.visible = true;
             }
         }
         onFrthSvdJobSig:
@@ -119,6 +249,7 @@ SavedJobsForm {
                 frthRect.visible = true;
                 frthJS.text = frthJb;
                 frthDate.text = frthDt;
+                bckgnd1.visible = true;
             }
         }
         onFfthSvdJobSig:
@@ -133,6 +264,7 @@ SavedJobsForm {
                 ffthRect.visible = true;
                 ffthJS.text = ffthJb;
                 ffthDate.text = ffthDt;
+                bckgnd1.visible = true;
             }
         }
         onSxthSvdJobSig:
@@ -147,6 +279,7 @@ SavedJobsForm {
                 sxthRect.visible = true;
                 sxthJS.text = sxthJb;
                 sxthDate.text = sxthDt;
+                bckgnd1.visible = true;
             }
         }
         onSvnthSvdJobSig:
@@ -161,6 +294,7 @@ SavedJobsForm {
                 svnthRect.visible = true;
                 svnthJS.text = svnthJb;
                 svnthDate.text = svnthDt;
+                bckgnd1.visible = true;
             }
         }
         onEighthSvdJobSig:
@@ -175,6 +309,7 @@ SavedJobsForm {
                 eighthRect.visible = true;
                 eighthJS.text = eighthJb;
                 eighthDate.text = eighthDt;
+                bckgnd1.visible = true;
             }
         }
         onNnthSvdJobSig:
@@ -189,6 +324,7 @@ SavedJobsForm {
                 nnthRect.visible = true;
                 nnthJS.text = nnthJb;
                 nnthDate.text = nnthDt;
+                bckgnd1.visible = true;
             }
         }
         onTnthSvdJobSig:
@@ -203,6 +339,7 @@ SavedJobsForm {
                 tnthRect.visible = true;
                 tnthJS.text = tnthJb;
                 tnthDate.text = tnthDt;
+                bckgnd1.visible = true;
             }
             bckgndHeight();
         }
@@ -210,19 +347,19 @@ SavedJobsForm {
         onHomeDisplay:
         {
             batteryAmnt.text = battery + " %";
-            if(battery > 0 && battery < 25)
+            if(battery > 0 && battery <= 25)
             {
                 batteryInd.source = "qrc:/battery_25.png";
             }
-            if(battery > 25 && battery < 50)
+            if(battery > 25 && battery <= 50)
             {
                 batteryInd.source = "qrc:/battery_50.png";
             }
-            if(battery > 50 && battery < 75)
+            if(battery > 50 && battery <= 75)
             {
                 batteryInd.source = "qrc:/battery_75.png";
             }
-            if(battery > 75 && battery < 100)
+            if(battery > 75 && battery <= 100)
             {
                 batteryInd.source = "qrc:/battery_100.png";
             }
